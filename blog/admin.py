@@ -3,7 +3,7 @@ from blog.models import Wine
 
 class WineAdmin(admin.ModelAdmin):
     model = Wine
-    list_display = ('name', 'comments')
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name', 'vintage', 'comments')
+    prepopulated_fields = {'slug': ('name', )}
 
 admin.site.register(Wine, WineAdmin)

@@ -6,6 +6,6 @@ from blog import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='home'),
-    url(r'^about/$', views.about, name='about'),
-    url(r'^contact/$', views.contact, name='contact'),
+    url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
+    url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
 ]

@@ -1,11 +1,6 @@
 from django.shortcuts import render
+from blog.models import Wine
 
 def index(request):
-    number = 6
-    return render(request, 'index.html', {'number': number,})
-
-def about(request):
-    return render(request, 'about.html')
-
-def contact(request):
-    return render(request, 'contact.html')
+    wine = Wine.objects.all().order_by('name')
+    return render(request, 'index.html', {'wine': wine,})
