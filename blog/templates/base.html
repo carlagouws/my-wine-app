@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+                My Wine App Project
+            {% endblock title %}
+        </title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        {% block header %}
+            <h1>Wine Diaries</h1>
+        {% endblock header %}
+    </head>
+    <body>
+
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+            </ul>
+        </nav>
+
+        {% block content %}
+        {% endblock content %}
+
+        {% block footer %}
+        {% endblock footer %}
+    </body>
+</html>
