@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {{ wine.name }} - {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <h2>{{ wine.name }}</h2>
+    <p>Type: {{ wine.type }}</p>
+    <p>Variety: {{ wine.variety }}</p>
+    <p>Vintage: {{ wine.vintage }}</p>
+    <p>Country: {{ wine.country }}</p>
+    <p>Comments: {{ wine.comments }}</p>
+    <a href="{% url 'edit_wine' pk=wine.pk %}">Edit me!<a/>
+{% endblock content %}

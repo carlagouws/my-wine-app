@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    New wine - {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    <h2>New Wine</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+{% endblock content %}

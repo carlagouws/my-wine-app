@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 TYPE_CHOICES = (
        ('red','Red'),
@@ -28,10 +29,10 @@ CULTIVAR_CHOICES = (
 
 class Wine(models.Model):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True)
+    created_date = models.DateTimeField(default=timezone.now)
     # image
     type = models.CharField(max_length=9, choices=TYPE_CHOICES, default='red')
-    cultivar = models.CharField(max_length=20, choices=CULTIVAR_CHOICES, default='cabernet franc')
+    variety = models.CharField(max_length=20, choices=CULTIVAR_CHOICES, default='cabernet franc')
     # radio button choices
     vintage = models.CharField(max_length=4)
     country = models.CharField(max_length=30, null=True, blank=True)

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Homepage - {{ block.super }}
+{% endblock title %}
+
+{% block content %}
+    {% for wine in wine %}
+    <h2><a href="{% url 'wine_detail' pk=wine.pk %}">{{ wine.name }}</a></h2>
+    <p>Type: {{ wine.type }}</p>
+    <p>Variety: {{ wine.variety }}</p>
+    <p>Vintage: {{ wine.vintage }}</p>
+    <p>Country: {{ wine.country }}</p>
+    {% endfor %}
+{% endblock content %}

@@ -4,24 +4,16 @@
     <head>
         <title>
             {% block title %}
-                My Wine App Project
+                My Wine App
             {% endblock title %}
         </title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
         {% block header %}
-            <h1>Wine Diaries</h1>
+            <h1><a href="/">Wine Diaries<a/></h1>
+            <p><a href="{% url 'new_wine' %}">New<a/></p>
         {% endblock header %}
     </head>
     <body>
-
-        <nav>
-            <ul>
-                <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'contact' %}">Contact</a></li>
-            </ul>
-        </nav>
-
         {% block content %}
         {% endblock content %}
 
