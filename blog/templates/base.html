@@ -10,7 +10,13 @@
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
         {% block header %}
             <h1><a href="/">Wine Diaries<a/></h1>
-            <p><a href="{% url 'new_wine' %}">New<a/></p>
+            {% if user.is_authenticated %}
+                <p>Hello {{ user.username }}!</p>
+                <p><a href="{% url 'logout' %}" class="top-menu">Logout</a></p>
+                <p><a href="{% url 'new_wine' %}">New<a/></p>
+                {% else %}
+                <p><a href="{% url 'login' %}" class="top-menu">Login</a></p>
+            {% endif %}
         {% endblock header %}
     </head>
     <body>

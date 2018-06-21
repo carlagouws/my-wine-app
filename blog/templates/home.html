@@ -7,9 +7,13 @@
 {% block content %}
     {% for wine in wine %}
     <h2><a href="{% url 'wine_detail' pk=wine.pk %}">{{ wine.name }}</a></h2>
+    <img src="{{ MEDIA_URL }}{{ wine.image.url }}" height="300"/>
+    {% if wine.image_2 %}
+        <img src="{{ MEDIA_URL }}{{ wine.image_2.url }}" height="300"/>
+    {% endif %}
     <p>Type: {{ wine.type }}</p>
     <p>Variety: {{ wine.variety }}</p>
     <p>Vintage: {{ wine.vintage }}</p>
-    <p>Country: {{ wine.country }}</p>
+    <p>Region: {{ wine.region }}</p>
     {% endfor %}
 {% endblock content %}

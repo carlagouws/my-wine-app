@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from blog.models import Wine
 from blog.forms import WineForm
+from django.contrib.auth.decorators import login_required
+from PIL import Image
 
 def home(request):
     wine = Wine.objects.all().order_by('name')
@@ -10,10 +12,11 @@ def wine_detail(request, pk):
     wine = Wine.objects.get(pk=pk)
     return render(request, 'wine_detail.html', {'wine': wine,})
 
+@login_required
 def edit_wine(request, pk):
     wine = Wine.objects.get(pk=pk)
     if request.method == 'POST':
-        form = WineForm(data=request.POST, instance=wine)
+        form = WineForm(request.POST, request.FILES, instance=wine)
         if form.is_valid():
             form.save()
             return redirect('wine_detail', pk=wine.pk)
@@ -21,9 +24,10 @@ def edit_wine(request, pk):
         form = WineForm(instance=wine)
     return render(request, 'edit_wine.html', {'wine': wine, 'form': form,})
 
+@login_required
 def new_wine(request):
     if request.method == 'POST':
-        form = WineForm(data=request.POST)
+        form = WineForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -31,15 +35,29 @@ def new_wine(request):
         form = WineForm()
     return render(request, 'new_wine.html', {'form': form,})
 
+@login_required
+def delete_wine(self, pk):
+    wine = Wine.objects.get(pk=pk)
+    wine.delete()
+    return redirect('home')
 
-
-
-
-
-
-
-
-
+def rotate_image(self, im, pk):
+    wine = Wine.objects.get(pk=pk)
+    image = Image.open('static/media/{}'.format(im))
+    if hasattr(image, '_getexif'):
+        orientation = 0x0112
+        exif = image._getexif()
+        if exif is not None:
+            orientation = exif[orientation]
+            rotations = {
+                3: Image.ROTATE_180,
+                6: Image.ROTATE_270,
+                8: Image.ROTATE_90
+            }
+            if orientation in rotations:
+                image = image.transpose(rotations[orientation])
+    image.save('static/media/{}'.format(im))
+    return redirect('wine_detail', pk=wine.pk)
 
 
 
