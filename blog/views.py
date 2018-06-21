@@ -19,6 +19,9 @@ def edit_wine(request, pk):
         form = WineForm(request.POST, request.FILES, instance=wine)
         if form.is_valid():
             form.save()
+            auto_rotate_image(wine.image)
+            if wine.image_2:
+                auto_rotate_image(wine.image_2)
             return redirect('wine_detail', pk=wine.pk)
     else:
         form = WineForm(instance=wine)
@@ -29,8 +32,11 @@ def new_wine(request):
     if request.method == 'POST':
         form = WineForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('home')
+            instance = form.save()
+            auto_rotate_image(instance.image)
+            if instance.image_2:
+                auto_rotate_image(instance.image_2)
+            return redirect('wine_detail', pk=instance.pk)
     else:
         form = WineForm()
     return render(request, 'new_wine.html', {'form': form,})
@@ -59,7 +65,21 @@ def rotate_image(self, im, pk):
     image.save('static/media/{}'.format(im))
     return redirect('wine_detail', pk=wine.pk)
 
-
+def auto_rotate_image(file):
+    image = Image.open('static/media/{}'.format(file))
+    if hasattr(image, '_getexif'):
+        orientation = 0x0112
+        exif = image._getexif()
+        if exif is not None:
+            orientation = exif[orientation]
+            rotations = {
+                3: Image.ROTATE_180,
+                6: Image.ROTATE_270,
+                8: Image.ROTATE_90
+            }
+            if orientation in rotations:
+                image = image.transpose(rotations[orientation])
+    image.save('static/media/{}'.format(file))
 
 
 

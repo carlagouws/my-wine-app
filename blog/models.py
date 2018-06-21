@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from multiselectfield import MultiSelectField
 
 TYPE_CHOICES = (
         ('Not Selected','Select type'),
@@ -10,7 +11,6 @@ TYPE_CHOICES = (
     )
 
 VARIETY_CHOICES = (
-        ('Not Selected','Select grapes'),
         ('Cabernet Franc', 'Cabernet Franc'),
         ('Cabernet Sauvignon', 'Cabernet Sauvignon'),
         ('Cinsault', 'Cinsault'),
@@ -25,10 +25,20 @@ VARIETY_CHOICES = (
         ('Pinot Gris', 'Pinot Gris'),
         ('Pinot Noir', 'Pinot Noir'),
         ('Sangiovese', 'Sangiovese'),
-        ('Sauvignon blanc', 'Sauvignon Blanc'),
+        ('Sauvignon Blanc', 'Sauvignon Blanc'),
         ('Shiraz', 'Shiraz'),
         ('Tempranillo','Tempranillo'),
     )
+#
+# GRAPE_CHOICES = (
+#     ('Not Selected', 'Select grapes'),
+#     ('Pinot Gris', 'Pinot Gris'),
+#     ('Pinot Noir', 'Pinot Noir'),
+#     ('Sangiovese', 'Sangiovese'),
+#     ('Sauvignon Blanc', 'Sauvignon Blanc'),
+#     ('Shiraz', 'Shiraz'),
+#     ('Tempranillo', 'Tempranillo'),
+# )
 
 class Wine(models.Model):
     name = models.CharField(max_length=255)
@@ -36,7 +46,7 @@ class Wine(models.Model):
     image = models.ImageField(default='default.jpg')
     image_2 = models.ImageField(null=True, blank=True)
     type = models.CharField(max_length=12, choices=TYPE_CHOICES, default='Select type')
-    variety = models.CharField(max_length=20, choices=VARIETY_CHOICES, default='Select grapes')
+    variety = MultiSelectField(choices=VARIETY_CHOICES, max_choices=5, max_length=100, null=True, blank=True)
     # radio button choices
     vintage = models.CharField(max_length=4)
     region = models.CharField(max_length=30, null=True, blank=True)
