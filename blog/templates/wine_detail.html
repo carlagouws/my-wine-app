@@ -10,17 +10,15 @@
     {% if wine.image_2 %}
         <img src="{{ MEDIA_URL }}{{ wine.image_2.url }}" height="300"/>
     {% endif %}
-    {% if user.is_authenticated %}
-        <p><a href="{% url 'rotate_image' im=wine.image pk=wine.pk %}">Correct rotation of image 1<a/></p>
-        {% if wine.image_2 %}
-            <p><a href="{% url 'rotate_image' im=wine.image_2 pk=wine.pk %}">Correct rotation of image 2<a/></p>
-        {% endif %}
-    {% endif %}
     <p>Type: {{ wine.type }}</p>
+    <p>Added: {{ wine.created_date }}</p>
+    <p>Rating: {{ wine.rating }}</p>
     <p>Variety: {{ wine.variety }}</p>
     <p>Vintage: {{ wine.vintage }}</p>
     <p>Region: {{ wine.region }}</p>
     <p>Comments: {{ wine.comments }}</p>
+    <p>Shop: {{ wine.shop }}</p>
+    <p>Price: £{{ wine.price }}</p>
     {% if user.is_authenticated %}
         <a href="{% url 'edit_wine' pk=wine.pk %}">Edit<a/>
         <a href="{% url 'delete_wine' pk=wine.pk %}">Delete<a/>

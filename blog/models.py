@@ -29,28 +29,36 @@ VARIETY_CHOICES = (
         ('Shiraz', 'Shiraz'),
         ('Tempranillo','Tempranillo'),
     )
-#
-# GRAPE_CHOICES = (
-#     ('Not Selected', 'Select grapes'),
-#     ('Pinot Gris', 'Pinot Gris'),
-#     ('Pinot Noir', 'Pinot Noir'),
-#     ('Sangiovese', 'Sangiovese'),
-#     ('Sauvignon Blanc', 'Sauvignon Blanc'),
-#     ('Shiraz', 'Shiraz'),
-#     ('Tempranillo', 'Tempranillo'),
-# )
+
+RATING_CHOICES = (
+        (u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606"+u"\u2606", 'One star'),
+        (u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606", 'Two stars'),
+        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606", 'Three stars'),
+        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606", 'Four stars'),
+        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605", 'Five stars'),
+    )
+
+SHOP_CHOICES = (
+        ('Aldi', 'Aldi'),
+        ('Asda', 'Asda'),
+        ('M&S', 'M&S'),
+        ('Sainsbury\'s', 'Sainsbury\'s'),
+        ('Tesco', 'Tesco'),
+        ('Virgin Wines', 'Virgin Wines'),
+        ('Waitrose', 'Waitrose'),
+    )
 
 class Wine(models.Model):
     name = models.CharField(max_length=255)
+    # slug = models.SlugField(unique=True)
     created_date = models.DateTimeField(default=timezone.now)
     image = models.ImageField(default='default.jpg')
     image_2 = models.ImageField(null=True, blank=True)
+    rating = models.CharField(max_length=20, choices=RATING_CHOICES, null=True, blank=True)
     type = models.CharField(max_length=12, choices=TYPE_CHOICES, default='Select type')
     variety = MultiSelectField(choices=VARIETY_CHOICES, max_choices=5, max_length=100, null=True, blank=True)
-    # radio button choices
     vintage = models.CharField(max_length=4)
     region = models.CharField(max_length=30, null=True, blank=True)
-    # review
     comments = models.TextField(null=True, blank=True)
-    # Bought or sampled
-    # If bought, where and how much?
+    shop = models.CharField(max_length=20, choices=SHOP_CHOICES, null=True, blank=True)
+    price = models.CharField(max_length=10, null=True, blank=True)

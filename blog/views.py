@@ -47,24 +47,6 @@ def delete_wine(self, pk):
     wine.delete()
     return redirect('home')
 
-def rotate_image(self, im, pk):
-    wine = Wine.objects.get(pk=pk)
-    image = Image.open('static/media/{}'.format(im))
-    if hasattr(image, '_getexif'):
-        orientation = 0x0112
-        exif = image._getexif()
-        if exif is not None:
-            orientation = exif[orientation]
-            rotations = {
-                3: Image.ROTATE_180,
-                6: Image.ROTATE_270,
-                8: Image.ROTATE_90
-            }
-            if orientation in rotations:
-                image = image.transpose(rotations[orientation])
-    image.save('static/media/{}'.format(im))
-    return redirect('wine_detail', pk=wine.pk)
-
 def auto_rotate_image(file):
     image = Image.open('static/media/{}'.format(file))
     if hasattr(image, '_getexif'):
@@ -98,3 +80,22 @@ def auto_rotate_image(file):
 # # POST request to save changes to an existing model instance
 # form = MyModelForm(request.POST, instance=my_model_instance)
 # form.save()
+
+
+# def rotate_image(self, im, pk):
+#     wine = Wine.objects.get(pk=pk)
+#     image = Image.open('static/media/{}'.format(im))
+#     if hasattr(image, '_getexif'):
+#         orientation = 0x0112
+#         exif = image._getexif()
+#         if exif is not None:
+#             orientation = exif[orientation]
+#             rotations = {
+#                 3: Image.ROTATE_180,
+#                 6: Image.ROTATE_270,
+#                 8: Image.ROTATE_90
+#             }
+#             if orientation in rotations:
+#                 image = image.transpose(rotations[orientation])
+#     image.save('static/media/{}'.format(im))
+#     return redirect('wine_detail', pk=wine.pk)
