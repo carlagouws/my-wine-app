@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from blog import views
+# from blog.search import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home'),
@@ -7,6 +8,7 @@ urlpatterns = [
     url(r'^wines/(?P<pk>\d+)/edit/$', views.edit_wine, name='edit_wine'),
     url(r'^wines/new/$', views.new_wine, name='new_wine'),
     url(r'^post/(?P<pk>\d+)/delete/$', views.delete_wine, name='delete_wine'),
+    url(r'^search/$', views.search, name='search'),
 ]
 
 

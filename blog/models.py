@@ -31,11 +31,11 @@ VARIETY_CHOICES = (
     )
 
 RATING_CHOICES = (
-        (u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606"+u"\u2606", 'One star'),
-        (u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606", 'Two stars'),
-        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606", 'Three stars'),
-        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606", 'Four stars'),
-        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605", 'Five stars'),
+        (u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606"+u"\u2606", u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606"+u"\u2606"),
+        (u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606", u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606"+u"\u2606"),
+        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606", u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606"+u"\u2606"),
+        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606", u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2606"),
+        (u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605", u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"+u"\u2605"),
     )
 
 SHOP_CHOICES = (
@@ -50,7 +50,6 @@ SHOP_CHOICES = (
 
 class Wine(models.Model):
     name = models.CharField(max_length=255)
-    # slug = models.SlugField(unique=True)
     created_date = models.DateTimeField(default=timezone.now)
     image = models.ImageField(default='default.jpg')
     image_2 = models.ImageField(null=True, blank=True)

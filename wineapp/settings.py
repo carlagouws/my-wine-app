@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'blog',
     'multiselectfield',
-    'star_ratings',
+    # 'star_ratings',
 ]
 
 MIDDLEWARE = [

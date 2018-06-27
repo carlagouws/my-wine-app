@@ -8,8 +8,6 @@
             {% endblock title %}
         </title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
         {% block header %}
             <h1><a href="/">Wine Diaries<a/></h1>
@@ -21,6 +19,7 @@
                 <p><a href="{% url 'login' %}" class="top-menu">Login</a></p>
             {% endif %}
         {% endblock header %}
+
     </head>
     <body>
         {% block content %}

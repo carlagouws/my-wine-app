@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from blog.models import Wine
-from blog.forms import WineForm
 from django.contrib.auth.decorators import login_required
 from PIL import Image
+from blog.models import Wine
+from blog.forms import WineForm, WineFilter
+# from blog.filters import WineFilter
 
 def home(request):
     wine = Wine.objects.all().order_by('name')
@@ -63,7 +64,10 @@ def auto_rotate_image(file):
                 image = image.transpose(rotations[orientation])
     image.save('static/media/{}'.format(file))
 
-
+def search(request):
+    wine_list = Wine.objects.all()
+    wine_filter = WineFilter(request.GET, queryset=wine_list)
+    return render(request, 'wine_search.html', {'filter': wine_filter})
 
 
 
