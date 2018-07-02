@@ -1,34 +1,40 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Homepage - {{ block.super }}
+    {{ block.super }} - Homepage
 {% endblock title %}
 
 {% block content %}
-    <p><a href="{% url 'search' %}" class="top-menu">Filter</a></p>
-    <hr />
     {% for wine in wine %}
-        <h2><a href="{% url 'wine_detail' pk=wine.pk %}">{{ wine.name }}</a></h2>
-        <img src="{{ MEDIA_URL }}{{ wine.image.url }}" height="300"/>
-        {% if wine.image_2 %}
-            <img src="{{ MEDIA_URL }}{{ wine.image_2.url }}" height="300"/>
-        {% endif %}
-        {% if wine.rating %}
-            <p>Rating: {{ wine.rating }}</p>
-        {% endif %}
-        <p>Variety: {{ wine.variety }}</p>
-        <p>Vintage: {{ wine.vintage }}</p>
-        {% if wine.rating %}
-            <p>Region: {{ wine.region }}</p>
-        {% endif %}
-        {% if wine.comments %}
-            <p>Comments: {{ wine.comments }}</p>
-        {% endif %}
-        {% if wine.shop %}
-            <p>Shop: {{ wine.shop }}</p>
-        {% endif %}
-        {% if wine.price %}
-            <p>Price: £{{ wine.price }}</p>
-        {% endif %}
+        <table class="two">
+            <tr>
+                <td class="two_first">
+                    <img src="{{ MEDIA_URL }}{{ wine.image.url }}" height="300"/>
+                    {% if wine.image_2 %}
+                        <img src="{{ MEDIA_URL }}{{ wine.image_2.url }}" height="300"/>
+                    {% endif %}
+                </td>
+                <td class="two_second">
+                    <h2><a href="{% url 'wine_detail' pk=wine.pk %}">{{ wine.name }}</a></h2>
+                    {% if wine.rating %}
+                        <p>Rating: {{ wine.rating }}</p>
+                    {% endif %}
+                    <p>Variety: {{ wine.variety }}</p>
+                    <p>Vintage: {{ wine.vintage }}</p>
+                    {% if wine.rating %}
+                        <p>Region: {{ wine.region }}</p>
+                    {% endif %}
+                    {% if wine.comments %}
+                        <p>Comments: {{ wine.comments }}</p>
+                    {% endif %}
+                    {% if wine.shop %}
+                        <p>Shop: {{ wine.shop }}</p>
+                    {% endif %}
+                    {% if wine.price %}
+                        <p>Price: £{{ wine.price }}</p>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
     {% endfor %}
 {% endblock content %}

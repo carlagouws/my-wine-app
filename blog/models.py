@@ -61,3 +61,6 @@ class Wine(models.Model):
     comments = models.TextField(null=True, blank=True)
     shop = models.CharField(max_length=20, choices=SHOP_CHOICES, null=True, blank=True)
     price = models.CharField(max_length=10, null=True, blank=True)
+
+    def __unicode__(self):
+        return self.name

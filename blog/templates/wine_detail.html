@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    {{ wine.name }} - {{ block.super }}
+    {{ block.super }} - {{ wine.name }}
 {% endblock title %}
 
 {% block content %}
@@ -20,7 +20,7 @@
     <p>Shop: {{ wine.shop }}</p>
     <p>Price: £{{ wine.price }}</p>
     {% if user.is_authenticated %}
-        <a href="{% url 'edit_wine' pk=wine.pk %}">Edit<a/>
-        <a href="{% url 'delete_wine' pk=wine.pk %}">Delete<a/>
+        <a href="{% url 'edit_wine' pk=wine.pk %}" class="button">Edit<a/>
+        <a href="{% url 'delete_wine' pk=wine.pk %}" class="button">Delete<a/>
     {% endif %}
 {% endblock content %}

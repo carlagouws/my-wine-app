@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from PIL import Image
 from blog.models import Wine
 from blog.forms import WineForm, WineFilter
-# from blog.filters import WineFilter
 
 def home(request):
     wine = Wine.objects.all().order_by('name')
@@ -34,7 +33,8 @@ def new_wine(request):
         form = WineForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save()
-            auto_rotate_image(instance.image)
+            if instance.image != 'default.jpg':
+                auto_rotate_image(instance.image)
             if instance.image_2:
                 auto_rotate_image(instance.image_2)
             return redirect('wine_detail', pk=instance.pk)
@@ -68,6 +68,21 @@ def search(request):
     wine_list = Wine.objects.all()
     wine_filter = WineFilter(request.GET, queryset=wine_list)
     return render(request, 'wine_search.html', {'filter': wine_filter})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

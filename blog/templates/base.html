@@ -1,31 +1,36 @@
-{% load staticfiles %}
+{% load static %}
 <!doctype html>
+
 <html>
     <head>
         <title>
             {% block title %}
-                My Wine App
+                Wine Diaries
             {% endblock title %}
         </title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}" />
 
         {% block header %}
-            <h1><a href="/">Wine Diaries<a/></h1>
-            {% if user.is_authenticated %}
-                <p>Hello {{ user.username }}!</p>
-                <p><a href="{% url 'logout' %}" class="top-menu">Logout</a></p>
-                <p><a href="{% url 'new_wine' %}">New<a/></p>
-                {% else %}
-                <p><a href="{% url 'login' %}" class="top-menu">Login</a></p>
-            {% endif %}
+        <table class="one">
+            <tr class="top menu">
+                <td class="one_first"><a href="/"><img src="{% static 'images/Logo.png' %}"/><a/></td>
+                <td class="one_second">
+                    {% if user.is_authenticated %}
+                        <p class="greeting">Hello, {{ user.username }}!</p>
+                        <p><a href="{% url 'logout' %}" class="button">Logout</a></p>
+                        <p><a href="{% url 'new_wine' %}" class="button">New<a/></p>
+                        <p><a href="{% url 'search' %}" class="button">Filter</a></p>
+                    {% else %}
+                        <p><a href="{% url 'login' %}" class="button">Login</a></p>
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        <br/>
         {% endblock header %}
-
     </head>
     <body>
         {% block content %}
         {% endblock content %}
-
-        {% block footer %}
-        {% endblock footer %}
     </body>
 </html>
