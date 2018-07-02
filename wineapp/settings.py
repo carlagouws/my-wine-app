@@ -79,8 +79,8 @@ WSGI_APPLICATION = 'wineapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangogirls',
-        'USER': 'name',
+        'NAME': 'wineapp',
+        'USER': 'carlag',
         'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '',
