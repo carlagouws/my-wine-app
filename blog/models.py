@@ -3,7 +3,6 @@ from django.utils import timezone
 from multiselectfield import MultiSelectField
 
 TYPE_CHOICES = (
-        ('Not Selected','Select type'),
         ('Red','Red'),
         ('White', 'White'),
         ('Rose','Rose'),
@@ -51,10 +50,10 @@ SHOP_CHOICES = (
 class Wine(models.Model):
     name = models.CharField(max_length=255)
     created_date = models.DateTimeField(default=timezone.now)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(default='default.jpg')
     image_2 = models.ImageField(null=True, blank=True)
     rating = models.CharField(max_length=20, choices=RATING_CHOICES, null=True, blank=True)
-    type = models.CharField(max_length=12, choices=TYPE_CHOICES, default='Select type')
+    type = models.CharField(max_length=12, choices=TYPE_CHOICES)
     variety = MultiSelectField(choices=VARIETY_CHOICES, max_choices=5, max_length=100, null=True, blank=True)
     vintage = models.CharField(max_length=4)
     region = models.CharField(max_length=30, null=True, blank=True)
