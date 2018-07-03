@@ -19,9 +19,10 @@ def edit_wine(request, pk):
         form = WineForm(request.POST, request.FILES, instance=wine)
         if form.is_valid():
             form.save()
-            auto_rotate_image(wine.image)
+            print(wine.image.path)
+            auto_rotate_image(wine.image.path)
             if wine.image_2:
-                auto_rotate_image(wine.image_2)
+                auto_rotate_image(wine.image_2.path)
             return redirect('wine_detail', pk=wine.pk)
     else:
         form = WineForm(instance=wine)
@@ -49,7 +50,7 @@ def delete_wine(self, pk):
     return redirect('home')
 
 def auto_rotate_image(file):
-    image = Image.open('media/{}'.format(file))
+    image = Image.open(file)
     if hasattr(image, '_getexif'):
         orientation = 0x0112
         exif = image._getexif()
@@ -62,7 +63,7 @@ def auto_rotate_image(file):
             }
             if orientation in rotations:
                 image = image.transpose(rotations[orientation])
-    image.save('media/{}'.format(file))
+    image.save(file)
 
 def search(request):
     wine_list = Wine.objects.all()
