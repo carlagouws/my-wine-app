@@ -51,7 +51,7 @@ SHOP_CHOICES = (
 class Wine(models.Model):
     name = models.CharField(max_length=255)
     created_date = models.DateTimeField(default=timezone.now)
-    image = models.ImageField(default='default.jpg')
+    image = models.ImageField(null=True, blank=True)
     image_2 = models.ImageField(null=True, blank=True)
     rating = models.CharField(max_length=20, choices=RATING_CHOICES, null=True, blank=True)
     type = models.CharField(max_length=12, choices=TYPE_CHOICES, default='Select type')
@@ -64,3 +64,7 @@ class Wine(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+# default='default.jpg'

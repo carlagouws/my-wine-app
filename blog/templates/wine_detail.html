@@ -6,7 +6,9 @@
 
 {% block content %}
     <h2>{{ wine.name }}</h2>
-    <img src="{{ MEDIA_URL }}{{ wine.image.url }}" height="500"/>
+    {% if wine.image %}
+        <img src="{{ MEDIA_URL }}{{ wine.image.url }}" height="500"/>
+    {% endif %}
     {% if wine.image_2 %}
         <img src="{{ MEDIA_URL }}{{ wine.image_2.url }}" height="500"/>
     {% endif %}
