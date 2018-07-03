@@ -33,10 +33,10 @@ def new_wine(request):
         form = WineForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save()
-            if instance.image != 'default.jpg':
-                auto_rotate_image(instance.image)
-            if instance.image_2:
-                auto_rotate_image(instance.image_2)
+            # if instance.image != 'default.jpg':
+            #     auto_rotate_image(instance.image)
+            # if instance.image_2:
+            #     auto_rotate_image(instance.image_2)
             return redirect('wine_detail', pk=instance.pk)
     else:
         form = WineForm()
