@@ -23,7 +23,8 @@ def edit_wine(request, pk):
         if form.is_valid():
             form.save()
             # Auto rotate image taken with mobile, i.e. exif values
-            auto_rotate_image(wine.image.path)
+            if wine.image != 'default.jpg':
+                auto_rotate_image(wine.image.path)
             if wine.image_2:
                 auto_rotate_image(wine.image_2.path)
             return redirect('wine_detail', pk=wine.pk)
