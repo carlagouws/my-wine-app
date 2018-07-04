@@ -10,23 +10,55 @@ TYPE_CHOICES = (
     )
 
 VARIETY_CHOICES = (
+        ('Barbera','Barbera'),
+        ('Blaufränkisch','Blaufränkisch'),
         ('Cabernet Franc', 'Cabernet Franc'),
         ('Cabernet Sauvignon', 'Cabernet Sauvignon'),
+        ('Carignan','Carignan'),
+        ('Carménère','Carménère'),
+        ('Chardonnay','Chardonnay'),
+        ('Châteauneuf-du-Pape', 'Châteauneuf-du-Pape'),
+        ('Chenin Blanc','Chenin Blanc'),
         ('Cinsault', 'Cinsault'),
-        ('Granache', 'Granache'),
+        ('Colombard','Colombard'),
+        ('Durif (Petite Sirah)','Durif (Petite Sirah)'),
+        ('Gamay','Gamay'),
+        ('Gewürztraminer','Gewürztraminer'),
+        ('Glera (Prosecco)','Glera (Prosecco)'),
+        ('Graciano','Graciano'),
+        ('Granache/Garnacha', 'Granache/Garnacha'),
+        ('Grüner Veltliner','Grüner Veltliner'),
         ('Malbec', 'Malbec'),
+        ('Malvasía','Malvasía'),
+        ('Marsanne','Marsanne'),
+        ('Mataro','Mataro'),
+        ('Maturana','Maturana'),
+        ('Mazuelo','Mazuelo'),
         ('Merlot', 'Merlot'),
         ('Montepulciano','Montepulciano'),
+        ('Muscat','Muscat'),
+        ('Nebbiolo','Nebbiolo'),
         ('Nero d\'Avola','Nero d\'Avola'),
-        ('Prosecco','Prosecco'),
+        ('Petit Verdot','Petit Verdot'),
         ('Pinotage','Pinotage'),
+        ('Pinot Blanc/Bianco','Pinot Blanc/Bianco'),
         ('Pinot Grigio', 'Pinot Grigio'),
         ('Pinot Gris', 'Pinot Gris'),
+        ('Pinot Meunier', 'Pinot Meunier'),
         ('Pinot Noir', 'Pinot Noir'),
+        ('Riesling','Riesling'),
+        ('Roussanne','Roussanne'),
         ('Sangiovese', 'Sangiovese'),
         ('Sauvignon Blanc', 'Sauvignon Blanc'),
+        ('Sémillon','Sémillon'),
         ('Shiraz', 'Shiraz'),
+        ('Syrah', 'Syrah'),
         ('Tempranillo','Tempranillo'),
+        ('Trebbiano','Trebbiano'),
+        ('Trollinger','Trollinger'),
+        ('Viognier','Viognier'),
+        ('Viura (Macabeo)','Viura (Macabeo)'),
+        ('Zinfandel','Zinfandel'),
     )
 
 RATING_CHOICES = (
@@ -40,13 +72,21 @@ RATING_CHOICES = (
 SHOP_CHOICES = (
         ('Aldi', 'Aldi'),
         ('Asda', 'Asda'),
+        ('Co-op', 'Co-op'),
+        ('Laithwaite\'s', 'Laithwaite\'s'),
+        ('Lidl', 'Lidl'),
         ('M&S', 'M&S'),
+        ('Majestic Wine', 'Majestic Wine'),
+        ('Morrisons', 'Morrisons'),
+        ('Ocado', 'Ocado'),
+        ('Oddbins', 'Oddbins'),
         ('Sainsbury\'s', 'Sainsbury\'s'),
         ('Tesco', 'Tesco'),
         ('Virgin Wines', 'Virgin Wines'),
         ('Waitrose', 'Waitrose'),
     )
 
+# Wine object model
 class Wine(models.Model):
     name = models.CharField(max_length=255)
     created_date = models.DateTimeField(default=timezone.now)
@@ -63,7 +103,3 @@ class Wine(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-# default='default.jpg'

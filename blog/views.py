@@ -4,14 +4,17 @@ from PIL import Image
 from blog.models import Wine
 from blog.forms import WineForm, WineFilter
 
+# Home page
 def home(request):
     wine = Wine.objects.all().order_by('name')
     return render(request, 'home.html', {'wine': wine,})
 
+# Wine object detail page
 def wine_detail(request, pk):
     wine = Wine.objects.get(pk=pk)
     return render(request, 'wine_detail.html', {'wine': wine,})
 
+# Edit wine page
 @login_required
 def edit_wine(request, pk):
     wine = Wine.objects.get(pk=pk)
@@ -19,7 +22,7 @@ def edit_wine(request, pk):
         form = WineForm(request.POST, request.FILES, instance=wine)
         if form.is_valid():
             form.save()
-            print(wine.image.path)
+            # Auto rotate image taken with mobile, i.e. exif values
             auto_rotate_image(wine.image.path)
             if wine.image_2:
                 auto_rotate_image(wine.image_2.path)
@@ -28,12 +31,14 @@ def edit_wine(request, pk):
         form = WineForm(instance=wine)
     return render(request, 'edit_wine.html', {'wine': wine, 'form': form,})
 
+# Create new wine page
 @login_required
 def new_wine(request):
     if request.method == 'POST':
         form = WineForm(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save()
+            # Auto rotate image taken with mobile, i.e. exif values
             if instance.image != 'default.jpg':
                 auto_rotate_image(instance.image.path)
             if instance.image_2:
@@ -43,12 +48,14 @@ def new_wine(request):
         form = WineForm()
     return render(request, 'new_wine.html', {'form': form,})
 
+# Delete wine page
 @login_required
 def delete_wine(self, pk):
     wine = Wine.objects.get(pk=pk)
     wine.delete()
     return redirect('home')
 
+# Function to auto rotate images based on exif values (e.g. images taken with mobile phones)
 def auto_rotate_image(file):
     image = Image.open(file)
     if hasattr(image, '_getexif'):
@@ -65,6 +72,7 @@ def auto_rotate_image(file):
                 image = image.transpose(rotations[orientation])
     image.save(file)
 
+# Filter wine page
 def search(request):
     wine_list = Wine.objects.all()
     wine_filter = WineFilter(request.GET, queryset=wine_list)

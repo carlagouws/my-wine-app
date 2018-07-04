@@ -122,7 +122,9 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+# Redirect url for user to login
 LOGIN_REDIRECT_URL = '/'
 
+# Media files (those uploaded by user)
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
